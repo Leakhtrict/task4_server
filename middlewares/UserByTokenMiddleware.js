@@ -1,4 +1,5 @@
 const { verify } = require("jsonwebtoken");
+const { Users } = require('../models');
 
 const userByToken = async (req, res, next) => {
     const accessToken = req.body.accessToken;
