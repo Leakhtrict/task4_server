@@ -1,15 +1,18 @@
 const { verify } = require("jsonwebtoken");
 
-const userByToken = (req, res, next) => {
+const userByToken = async (req, res, next) => {
     const accessToken = req.body.accessToken;
-    console.log(accessToken);
     if (!accessToken) return res.json({ error: "User is not logged in"});
 
     try{
         const validToken = verify(accessToken, "authapplication");
-        if (validToken){
+        const user = await Users.findOne({ where: { id: validToken.id } });
+        if (user){
             req.body = validToken;
             return next();
+        }
+        else{
+            return res.json({ error: "User is not logged in" });
         }
     } catch(e){
         return res.json({ error: e });
