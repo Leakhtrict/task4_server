@@ -6,7 +6,7 @@ const userByToken = async (req, res, next) => {
 
     try{
         const validToken = verify(accessToken, "authapplication");
-        const user = await Users.findOne({ where: { id: validToken.id } });
+        const user = await Users.findOne({ where: { id: validToken.id, status: "online" } });
         if (user){
             req.body = validToken;
             return next();
