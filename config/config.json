@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Art7188239Art",
+    "password": "password",
     "database": "authdb",
     "host": "localhost",
     "dialect": "mysql"
