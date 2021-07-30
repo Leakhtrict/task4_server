@@ -16,22 +16,22 @@ router.get("/auth", validateToken, (req, res) => {
 });
 
 router.put("/logout", userByToken, async (req, res) => {
-    await Users.update( { status: "offline" }, { where: { id: req.body.id } });
+    const user = await Users.update( { status: "offline" }, { where: { id: req.body.id } });
     res.json("logged out successfully");
 });
 
 router.put("/deleteUsers", async (req, res) => {
-    await Users.destroy({ where: { id: req.body } });
+    const user = await Users.destroy({ where: { id: req.body } });
     res.json("deleted successfully");
 });
 
 router.put("/blockUsers", async (req, res) => {
-    await Users.update( { status: "offline", isBlocked: true }, { where: { id: req.body, isBlocked: false } });
+    const user = await Users.update( { status: "offline", isBlocked: true }, { where: { id: req.body, isBlocked: false } });
     res.json("blocked successfully");
 });
 
 router.put("/unblockUsers", async (req, res) => {
-    await Users.update( { isBlocked: false }, { where: { id: req.body, isBlocked: true } });
+    const user = await Users.update( { isBlocked: false }, { where: { id: req.body, isBlocked: true } });
     res.json("unblocked successfully");
 });
 
