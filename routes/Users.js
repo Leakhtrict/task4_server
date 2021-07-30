@@ -26,12 +26,12 @@ router.put("/deleteUsers", async (req, res) => {
 });
 
 router.put("/blockUsers", async (req, res) => {
-    await Users.update( { status: "offline", isBlocked: true }, { where: { id: req.body } });
+    await Users.update( { status: "offline", isBlocked: true }, { where: { id: req.body, isBlocked: false } });
     res.json("blocked successfully");
 });
 
 router.put("/unblockUsers", async (req, res) => {
-    await Users.update( { isBlocked: false }, { where: { id: req.body } });
+    await Users.update( { isBlocked: false }, { where: { id: req.body, isBlocked: true } });
     res.json("unblocked successfully");
 });
 
